@@ -1,11 +1,12 @@
-type Location = {
+// src/weatherService.ts
+export type Location = {
   latitude: number;
   longitude: number;
 };
 
-type WeatherResponse = {
-  name: string;
-  main: {
+export type WeatherResponse = {
+  name?: string;
+  main?: {
     temp: number;
   };
   weather: {
@@ -13,20 +14,30 @@ type WeatherResponse = {
   }[];
 };
 
-type WeatherData = {
-  city: string;
-  temperature: {
-    F: string;
-    C: string;
-  };
-  conditions: string;
-} | null;
+export type WeeklyWeatherResponse = {
+  daily: Array<{
+    dt: number;
+    temp: {
+      day: number;
+      min: number;
+      max: number;
+    };
+    weather: Array<{
+      main: string;
+      description: string;
+      icon: string;
+    }>;
+  }>;
+};
 
-const location: Location = { latitude: 27.964157, longitude: -82.452606 }; //for Tampa Florida, my current residence
+export const location: Location = {
+  latitude: 27.964157,
+  longitude: -82.452606,
+};
 
-const APIKey = "d2fb9c478e73e2c885b0d6aaa2b2c422"; //would typically hide this in an ENV file but its a free API Key and I trust you guys
+export const APIKey = "d2fb9c478e73e2c885b0d6aaa2b2c422";
 
-const getForecastWeather = (
+export const getForecastWeather = (
   location: Location,
   APIKey: string
 ): Promise<WeatherResponse> => {
@@ -41,19 +52,17 @@ const getForecastWeather = (
   });
 };
 
-const filterDataFromWeatherAPI = (res: WeatherResponse): WeatherData => {
-  if (!res) {
-    return null;
-  }
-  const weather: WeatherData = {
-    city: res.name,
-    temperature: {
-      F: `${Math.round(res.main.temp)}`,
-      C: `${Math.round(((res.main.temp - 32) * 5) / 9)}`,
-    },
-    conditions: res.weather[0].main,
-  };
-  return weather;
+export const getWeeklyWeather = (
+  location: Location,
+  APIKey: string
+): Promise<WeeklyWeatherResponse> => {
+  return fetch(
+    `https://api.openweathermap.org/data/3.0/onecall?lat=${location.latitude}&lon=${location.longitude}&exclude=current,minutely,hourly,alerts&appid=${APIKey}&units=imperial`
+  ).then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(`Error: ${res.status}`);
+    }
+  });
 };
-
-export { getForecastWeather, filterDataFromWeatherAPI, location, APIKey };
