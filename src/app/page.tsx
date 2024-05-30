@@ -6,7 +6,6 @@ import {
   getWeeklyWeather,
   location,
   APIKey,
-  WeatherResponse,
   WeeklyWeatherResponse,
 } from "./utils/weatherService";
 
@@ -53,47 +52,65 @@ const Home: React.FC = () => {
     return `${month}/${day}/${year}`;
   };
 
+  const capitalizeFirstLetter = (str: string): string => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <div className="text-red-600 font-bold text-center">Error: {error}</div>
+    );
   }
 
   if (!todayWeather || !weeklyWeather) {
-    return <div>Loading...</div>;
+    return <div className="text-center">Loading...</div>;
   }
 
   return (
-    <>
-      <div>
-        <h1>Weather in {todayWeather.city}</h1>
+    <div className="max-w-4xl mx-auto p-4">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold mb-2">
+          Weather in {todayWeather.city}
+        </h1>
+        <p className="text-lg text-gray-500">
+          Updated on {formatDate(Date.now() / 1000)}
+        </p>
       </div>
+
+      <div className="bg-blue-100 p-6 rounded-lg shadow-lg mb-8">
+        <h2 className="text-2xl font-semibold mb-4">Today&apos;s Weather</h2>
+        <p className="text-lg">
+          Temperature: {todayWeather.temperature.F}°F /{" "}
+          {todayWeather.temperature.C}°C
+        </p>
+        <p className="text-lg">Conditions: {todayWeather.conditions}</p>
+      </div>
+
       <div>
-        <h2>7-Day Forecast</h2>
-        <ul style={{ display: "flex", listStyle: "none" }}>
+        <h2 className="text-2xl font-semibold mb-4 text-center">
+          7-Day Forecast
+        </h2>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {weeklyWeather.daily.map((day) => (
-            <li key={day.dt}>
+            <li
+              key={day.dt}
+              className="bg-slate-400	 p-4 rounded-lg shadow-lg text-center"
+            >
               <img
                 src={`http://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
                 alt={day.weather[0].description}
+                className="mx-auto mb-2 bg-gray "
               />
-
-              <p>Date: {formatDate(day.dt)}</p>
-              <p>Temperature: {day.temp.day}°F</p>
-              <p>Conditions: {day.weather[0].description}</p>
+              <p className="text-lg font-semibold">{formatDate(day.dt)}</p>
+              <p className="text-lg">Temp: {day.temp.day}°F</p>
+              <p className="text-lg">
+                {capitalizeFirstLetter(day.weather[0].description)}
+              </p>
             </li>
           ))}
         </ul>
       </div>
-      <div>
-        <h2>Weather Today</h2>
-        <p>
-          Temperature: {todayWeather.temperature.F}°F /{" "}
-          {todayWeather.temperature.C}°C
-        </p>
-        <p>Conditions: {todayWeather.conditions}</p>
-
-        <p>Date: {formatDate(Date.now() / 1000)}</p>
-      </div>
-    </>
+    </div>
   );
 };
 

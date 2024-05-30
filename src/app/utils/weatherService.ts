@@ -1,4 +1,3 @@
-// src/weatherService.ts
 export type Location = {
   latitude: number;
   longitude: number;
@@ -34,8 +33,10 @@ export const location: Location = {
   latitude: 27.964157,
   longitude: -82.452606,
 };
+//location for Tampa FL
 
 export const APIKey = "d2fb9c478e73e2c885b0d6aaa2b2c422";
+//I Have faith you all wont steal my API Key, this would obviously be in an ENV file if it was a PROD app
 
 export const getForecastWeather = (
   location: Location,
