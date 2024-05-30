@@ -1,36 +1,17 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Jeremy's task :
 
-## Getting Started
+Started at 2:39pm (after installations)
+Due at 5:58pm
 
-First, run the development server:
+Create a weather dashboard that displays today’s forecast and a weekly forecast. Guidelines for this dashboard are as follows.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+-              The dashboard MUST be built using Next.js and Typescript.
+-              The dashboard MUST bring in data from a weather api. You can use any api of your choosing
+  (My choice: https://openweathermap.org/)
+-              This dashboard may be styled however you like.
+-              The dashboard can have as many tabs or pages as you would like.
+-              You may use any component libraries you would like.
+-              You may use TailwindCSS.
+-              CSS preprocessors like SASS are allowed.
+-              You may use any assets you have access to or find on the internet such as https://fonts.google.com/icons.
+-              Have fun with it! You may add in any additional things, even if it’s not tied to the weather.
